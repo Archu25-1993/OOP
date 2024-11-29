@@ -1,0 +1,205 @@
+/*
+Imagine a publishing company which does marketing for book
+and audiocassette versions.
+Create a class publication that stores the title (a string)
+and price (type float) of a
+publication.From this class derive two classes: book, which
+adds a page count(type int),
+and tape, which adds a playing time in minutes(type float).
+Write a program that instantiates the book and tape classes,
+allows user to enter data and
+displays the data members.If an exception is caught, replace
+all the data member values
+with zero values.
+*/
+
+# include&lt;iostream&gt;
+# include&lt;stdio.h&gt;
+using namespace std;
+class publication // declaring class Publication
+{
+private:
+string title;
+float price;
+public:
+void add()
+{
+cout &lt;&lt; &quot;\nEnter the Publication information : &quot; &lt;&lt; endl;
+cout &lt;&lt; &quot;Enter Title of the Publication : &quot;;
+cin.ignore();
+
+getline(cin, title);
+cout &lt;&lt; &quot;Enter Price of Publication : &quot;;
+cin &gt;&gt; price;
+}
+void display()
+{
+cout &lt;&lt; &quot;\n--------------------------------------------------&quot;;
+cout &lt;&lt; &quot;\nTitle of Publication : &quot; &lt;&lt; title;
+cout &lt;&lt; &quot;\nPublication Price : &quot; &lt;&lt; price;
+}
+};
+class book : public publication // declaring class book which inherits class publication in public mode.
+{
+private:
+int page_count;
+public:
+void add_book()
+{
+try
+{
+add();
+cout &lt;&lt; &quot;Enter Page Count of Book : &quot;;
+cin &gt;&gt; page_count;
+if (page_count &lt;= 0)
+{
+throw page_count;
+}
+}
+catch(...)
+
+{
+cout &lt;&lt; &quot;\nInvalid Page Count!!!&quot;;
+page_count = 0;
+}
+}
+void display_book()
+{
+display();
+cout &lt;&lt; &quot;\nPage Count : &quot; &lt;&lt;
+page_count;
+cout &lt;&lt; &quot;\n--------------------------------------------------\n&quot;;
+}
+};
+class tape : public publication // declaring class tape which inherits class publication in public mode
+{
+private:
+float play_time;
+public:
+void add_tape()
+{
+try
+{
+add();
+cout &lt;&lt; &quot;Enter Play Duration of the Tape : &quot;;
+cin &gt;&gt; play_time;
+if (play_time &lt;= 0)
+throw play_time;
+}
+catch(...)
+
+{
+cout &lt;&lt; &quot;\nInvalid Play Time!!!&quot;;
+play_time = 0;
+}
+}
+void display_tape()
+{
+display();
+cout &lt;&lt; &quot;\nPlay Time : &quot; &lt;&lt;
+play_time &lt;&lt; &quot; min&quot;;
+cout &lt;&lt; &quot;\n--------------------------------------------------\n&quot;;
+}
+};
+int main()
+{
+book b1[10]; // object of class book
+tape t1[10]; // object of class tape
+int ch, b_count = 0, t_count = 0;
+do
+{
+cout &lt;&lt; &quot;\n* * * * * PUBLICATION DATABASE SYSTEM * * * * *&quot;;
+cout &lt;&lt; &quot;\n--------------------MENU-----------------------&quot;;
+cout &lt;&lt; &quot;\n1. Add Information to Books&quot;;
+cout &lt;&lt; &quot;\n2. Add Information to Tapes&quot;;
+cout &lt;&lt; &quot;\n3. Display Books Information&quot;;
+cout &lt;&lt; &quot;\n4. Display Tapes Information&quot;;
+cout &lt;&lt; &quot;\n5. Exit&quot;;
+cout &lt;&lt; &quot;\n\nEnter your choice : &quot;;
+cin &gt;&gt; ch;
+
+switch(ch)
+{
+case 1:
+b1[b_count].add_book();
+b_count + +;
+break;
+case 2:
+t1[t_count].add_tape();
+t_count + +;
+break;
+case 3:
+cout &lt;&lt; &quot;\n* * * * BOOK PUBLICATION DATABASE SYSTEM * * * *&quot;;
+for (int j=0;j &lt; b_count;j++)
+{
+b1[j].display_book();
+}
+break;
+case 4:
+cout &lt;&lt; &quot;\n* * * * TAPE PUBLICATION DATABASE SYSTEM * * * *&quot;;
+for (int j=0;j &lt; t_count;j++)
+{
+t1[j].display_tape();
+}
+break;
+case 5:
+exit(0);
+}
+}while (ch != 5);
+return 0;
+
+}
+OUTPUT:
+* * * * * PUBLICATION DATABASE SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Add Information to Books
+2. Add Information to Tapes
+3. Display Books Information
+4. Display Tapes Information
+5. Exit
+
+Enter your choice : 1
+
+Enter the Publication information :
+Enter Title of the Publication : Technical Publication
+Enter Price of Publication : 400
+Enter Page Count of Book : 220
+
+* * * * * PUBLICATION DATABASE SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Add Information to Books
+2. Add Information to Tapes
+3. Display Books Information
+4. Display Tapes Information
+5. Exit
+
+Enter your choice : 3
+
+* * * * BOOK PUBLICATION DATABASE SYSTEM * * * *
+--------------------------------------------------
+Title of Publication : Technical Publication
+Publication Price : 400
+Page Count : 220
+--------------------------------------------------
+
+* * * * * PUBLICATION DATABASE SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Add Information to Books
+2. Add Information to Tapes
+3. Display Books Information
+4. Display Tapes Information
+5. Exit
+
+Enter your choice : 4
+
+* * * * TAPE PUBLICATION DATABASE SYSTEM * * * *
+* * * * * PUBLICATION DATABASE SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Add Information to Books
+2. Add Information to Tapes
+
+3. Display Books Information
+4. Display Tapes Information
+5. Exit
+
+Enter your choice :
