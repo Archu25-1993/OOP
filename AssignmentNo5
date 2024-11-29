@@ -1,0 +1,126 @@
+/*
+Write a function template for selection sort that inputs, sorts and outputs an integer array
+and
+a float array.
+*/
+
+#include&lt;iostream&gt;
+using namespace std;
+int n;
+#define size 10
+template&lt;class T&gt;
+void sel(T A[size])
+{
+int i,j,min;
+T temp;
+for(i=0;i&lt;n-1;i++)
+{
+min=i;
+for(j=i+1;j&lt;n;j++)
+{
+if(A[j]&lt;A[min])
+min=j;
+}
+temp=A[i];
+A[i]=A[min];
+A[min]=temp;
+}
+
+cout&lt;&lt;&quot;\nSorted array:&quot;;
+for(i=0;i&lt;n;i++)
+{
+cout&lt;&lt;&quot; &quot;&lt;&lt;A[i];
+}
+}
+
+int main()
+{
+int A[size];
+float B[size];
+int i;
+int ch;
+do
+{
+cout&lt;&lt;&quot;\n* * * * * SELECTION SORT SYSTEM * * * * *&quot;;
+cout&lt;&lt;&quot;\n--------------------MENU-----------------------&quot;;
+cout&lt;&lt;&quot;\n1. Integer Values&quot;;
+cout&lt;&lt;&quot;\n2. Float Values&quot;;
+cout&lt;&lt;&quot;\n3. Exit&quot;;
+cout&lt;&lt;&quot;\n\nEnter your choice : &quot;;
+cin&gt;&gt;ch;
+
+switch(ch)
+{
+case 1:
+cout&lt;&lt;&quot;\nEnter total no of int elements:&quot;;
+
+cin&gt;&gt;n;
+cout&lt;&lt;&quot;\nEnter int elements:&quot;;
+for(i=0;i&lt;n;i++)
+{
+cin&gt;&gt;A[i];
+}
+sel(A);
+
+break;
+
+case 2:
+cout&lt;&lt;&quot;\nEnter total no of float elements:&quot;;
+
+cin&gt;&gt;n;
+cout&lt;&lt;&quot;\nEnter float elements:&quot;;
+for(i=0;i&lt;n;i++)
+{
+cin&gt;&gt;B[i];
+}
+sel(B);
+
+break;
+
+case 3:
+exit(0);
+
+}
+}while(ch!=3);
+
+return 0;
+
+}
+OUTPUT:-
+* * * * * SELECTION SORT SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Integer Values
+2. Float Values
+3. Exit
+
+Enter your choice : 1
+
+Enter total no of int elements:3
+
+Enter int elements:22
+12
+6
+
+Sorted array: 6 12 22
+* * * * * SELECTION SORT SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Integer Values
+2. Float Values
+3. Exit
+
+Enter your choice : 2
+
+Enter total no of float elements:3
+
+Enter float elements:11
+5
+9
+
+Sorted array: 5 9 11
+* * * * * SELECTION SORT SYSTEM * * * * *
+--------------------MENU-----------------------
+1. Integer Values
+2. Float Values
+3. Exit
+
+Enter your choice :
