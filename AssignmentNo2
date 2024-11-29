@@ -1,0 +1,216 @@
+/*
+Experiment Number 2 : Develop a program in C++ to create a database of
+student’s information system
+containing the following information: Name, Roll number, Class, Division,
+Date of Birth, Blood group,
+Contactaddress, Telephone number, Driving license no. and other. Construct
+the database with
+suitable member functions. Make use of constructor, default constructor,
+copy constructor,
+destructor, static member functions, friend class, this pointer, inline
+code and dynamic
+memory allocation operators-new and delete as well as exception handling.
+*/
+
+#include&lt;iostream&gt;
+#include&lt;string.h&gt;
+using namespace std;
+
+class StudData;
+
+class Student{
+string name;
+int roll_no;
+string cls;
+char* division;
+string dob;
+char* bloodgroup;
+
+static int count;
+
+public:
+
+Student() // Default Constructor
+{
+name=&quot;&quot;;
+roll_no=0;
+cls=&quot;&quot;;
+division=new char;
+dob=&quot;dd/mm/yyyy&quot;;
+bloodgroup=new char[4];
+}
+
+~Student()
+{
+delete division;
+delete[] bloodgroup;
+}
+
+static int getCount()
+{
+return count;
+}
+
+void getData(StudData*);
+void dispData(StudData*);
+};
+
+class StudData{
+string caddress;
+long int* telno;
+long int* dlno;
+friend class Student;
+
+public:
+
+StudData()
+{
+caddress=&quot;&quot;;
+telno=new long;
+dlno=new long;
+}
+
+~StudData()
+{
+delete telno;
+delete dlno;
+}
+
+void getStudData()
+{
+cout&lt;&lt;&quot;Enter Contact Address : &quot;;
+cin.get();
+getline(cin,caddress);
+cout&lt;&lt;&quot;Enter Telephone Number : &quot;;
+cin&gt;&gt;*telno;
+cout&lt;&lt;&quot;Enter Driving License Number : &quot;;
+
+cin&gt;&gt;*dlno;
+}
+
+void dispStudData()
+{
+cout&lt;&lt;&quot;Contact Address : &quot;&lt;&lt;caddress&lt;&lt;endl;
+cout&lt;&lt;&quot;Telephone Number : &quot;&lt;&lt;*telno&lt;&lt;endl;
+cout&lt;&lt;&quot;Driving License Number : &quot;&lt;&lt;*dlno&lt;&lt;endl;
+}
+};
+
+inline void Student::getData(StudData* st)
+{
+cout&lt;&lt;&quot;Enter Student Name : &quot;;
+getline(cin,name);
+cout&lt;&lt;&quot;Enter Roll Number : &quot;;
+cin&gt;&gt;roll_no;
+cout&lt;&lt;&quot;Enter Class : &quot;;
+cin.get();
+getline(cin,cls);
+cout&lt;&lt;&quot;Enter Division : &quot;;
+cin&gt;&gt;division;
+cout&lt;&lt;&quot;Enter Date of Birth : &quot;;
+cin.get();
+getline(cin,dob);
+cout&lt;&lt;&quot;Enter Blood Group : &quot;;
+cin&gt;&gt;bloodgroup;
+st-&gt;getStudData();
+count++;
+
+}
+
+inline void Student::dispData(StudData* st1)
+{
+cout&lt;&lt;&quot;Student Name : &quot;&lt;&lt;name&lt;&lt;endl;
+cout&lt;&lt;&quot;Roll Number : &quot;&lt;&lt;roll_no&lt;&lt;endl;
+cout&lt;&lt;&quot;Class : &quot;&lt;&lt;cls&lt;&lt;endl;
+cout&lt;&lt;&quot;Division : &quot;&lt;&lt;division&lt;&lt;endl;
+cout&lt;&lt;&quot;Date of Birth : &quot;&lt;&lt;dob&lt;&lt;endl;
+cout&lt;&lt;&quot;Blood Group : &quot;&lt;&lt;bloodgroup&lt;&lt;endl;
+st1-&gt;dispStudData();
+}
+
+int Student::count;
+
+int main()
+{
+Student* stud1[100];
+StudData* stud2[100];
+int n=0;
+char ch;
+
+do
+{
+stud1[n]=new Student;
+stud2[n]=new StudData;
+stud1[n]-&gt;getData(stud2[n]);
+n++;
+cout&lt;&lt;&quot;Do you want to add another student (y/n) : &quot;;
+
+cin&gt;&gt;ch;
+cin.get();
+} while (ch==&#39;y&#39; || ch==&#39;Y&#39;);
+
+for(int i=0;i&lt;n;i++)
+{
+cout&lt;&lt;&quot;---------------------------------------------------------------&quot;&lt;&lt;endl;
+stud1[i]-&gt;dispData(stud2[i]);
+}
+
+cout&lt;&lt;&quot;---------------------------------------------------------------&quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;Total Students : &quot;&lt;&lt;Student::getCount();
+cout&lt;&lt;endl&lt;&lt;&quot;---------------------------------------------------------------&quot;&lt;&lt;endl;
+
+for(int i=0;i&lt;n;i++)
+{
+delete stud1[i];
+delete stud2[i];
+}
+
+return 0;
+}
+
+OUTPUT:-
+Enter Student Name : Ram
+Enter Roll Number : 11
+Enter Class : SE
+
+Enter Division : A
+Enter Date of Birth : 12/10/2004
+Enter Blood Group : B+
+Enter Contact Address : Nira
+Enter Telephone Number : 02112232542
+Enter Driving License Number : 2356898542
+Do you want to add another student (y/n) : y
+Enter Student Name : Jiya
+Enter Roll Number : 22
+Enter Class : SE
+Enter Division : B
+Enter Date of Birth : 05/08/2005
+Enter Blood Group : A+
+Enter Contact Address : Baramati
+Enter Telephone Number : 02112453652
+Enter Driving License Number : 4253698512
+Do you want to add another student (y/n) : n
+---------------------------------------------------------------
+Student Name : Ram
+Roll Number : 11
+Class : SE
+Division : A
+Date of Birth : 12/10/2004
+Blood Group : B+
+Contact Address : Nira
+Telephone Number : 2112232542
+Driving License Number : 2356898542
+
+---------------------------------------------------------------
+Student Name : Jiya
+Roll Number : 22
+Class : SE
+Division : B
+Date of Birth : 05/08/2005
+Blood Group : A+
+Contact Address : Baramati
+Telephone Number : 2112453652
+Driving License Number : 4253698512
+---------------------------------------------------------------
+Total Students : 2
+---------------------------------------------------------------
