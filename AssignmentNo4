@@ -1,61 +1,98 @@
 /*
-Write a C++ program that creates an output file, writes information to it, closes the file, open it again as an input file and read the information from the file.
+Write a C++ program that creates an output file, writes information to it, closes the file, open it again as
+an input file and read the information from the file.
 */
 
-#include<iostream>
-#include<fstream>
+#include&lt;iostream&gt;
+#include&lt;fstream&gt;
 using namespace std;
-class Employee              // declaring class employee
+class Employee // declaring class employee
 {
- string Name;
- int ID;
- double salary;
- public:
- void accept()
- {
- cout<<"\n Name : ";
- cin.ignore();
+string Name;
+int ID;
+double salary;
+public:
+void accept()
+{
+cout&lt;&lt;&quot;\n Name : &quot;;
+cin.ignore();
 getline(cin,Name);
- cout<<"\n Id : ";
- cin>>ID;
- cout<<"\n Salary : ";
- cin>>salary;
- }
- void display()
- {
- cout<<"\n Name : "<<Name;
- cout<<"\n Id : "<<ID;
- cout<<"\n Salary : "<<salary<<endl;
- }
+cout&lt;&lt;&quot;\n Id : &quot;;
+cin&gt;&gt;ID;
+cout&lt;&lt;&quot;\n Salary : &quot;;
+cin&gt;&gt;salary;
+}
+void display()
+{
+cout&lt;&lt;&quot;\n Name : &quot;&lt;&lt;Name;
+cout&lt;&lt;&quot;\n Id : &quot;&lt;&lt;ID;
+cout&lt;&lt;&quot;\n Salary : &quot;&lt;&lt;salary&lt;&lt;endl;
+
+}
 };
 
 int main()
 {
- Employee o[5];
- fstream f;
- int i,n;
+Employee o[5];
+fstream f;
+int i,n;
 
- f.open("demo.txt",ios::out);
- cout<<"\n Enter the number of employees you want to store : ";
- cin>>n;
- for(i=0;i<n;i++)
- {
- cout<<"\n Enter information of Employee "<<i+1<<"\n";
- o[i].accept();
- f.write((char*)&o[i],sizeof o[i]);
- }
-
- f.close();
-
- f.open("demo.txt",ios::in);
- cout<<"\n Information of Employees is as follows : \n";
- for(i=0;i<n;i++)
- {
- cout<<"\nEmployee "<<i+1<<"\n";
- f.write((char*)&o[i],sizeof o[i]);
- o[i].display();
- }
- f.close();
- 
- return 0;
+f.open(&quot;demo.txt&quot;,ios::out);
+cout&lt;&lt;&quot;\n Enter the number of employees you want to store : &quot;;
+cin&gt;&gt;n;
+for(i=0;i&lt;n;i++)
+{
+cout&lt;&lt;&quot;\n Enter information of Employee &quot;&lt;&lt;i+1&lt;&lt;&quot;\n&quot;;
+o[i].accept();
+f.write((char*)&amp;o[i],sizeof o[i]);
 }
+
+f.close();
+
+f.open(&quot;demo.txt&quot;,ios::in);
+cout&lt;&lt;&quot;\n Information of Employees is as follows : \n&quot;;
+for(i=0;i&lt;n;i++)
+{
+cout&lt;&lt;&quot;\nEmployee &quot;&lt;&lt;i+1&lt;&lt;&quot;\n&quot;;
+f.write((char*)&amp;o[i],sizeof o[i]);
+o[i].display();
+}
+
+f.close();
+
+return 0;
+}
+
+OUTPUT:
+
+Enter the number of employees you want to store : 2
+
+Enter information of Employee 1
+
+Name : Ram
+
+Id : 101
+
+Salary : 53000
+
+Enter information of Employee 2
+
+Name : John
+
+Id : 102
+
+Salary : 25000
+
+Information of Employees is as follows :
+
+Employee 1
+
+Name : Ram
+Id : 101
+Salary : 53000
+
+Employee 2
+
+Name : John
+Id : 102
+Salary : 25000
